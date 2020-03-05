@@ -1,8 +1,10 @@
 package com.github.binarywang.demo.wx.miniapp.controller;
 
+import com.github.binarywang.demo.wx.miniapp.dao.UserDao;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,14 @@ import me.chanjar.weixin.common.error.WxErrorException;
 @RequestMapping("/wx/user/{appid}")
 public class WxMaUserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private UserDao userDao;
+
+    @GetMapping("/login2")
+    public String login2() {
+       return userDao.getUserById(1).toString();
+    }
 
     /**
      * 登陆接口
