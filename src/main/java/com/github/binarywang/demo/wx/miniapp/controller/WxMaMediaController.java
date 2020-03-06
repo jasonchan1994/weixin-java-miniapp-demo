@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +39,41 @@ import me.chanjar.weixin.common.error.WxErrorException;
 @RequestMapping("/wx/media/{appid}")
 public class WxMaMediaController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
+
+    @Value("${file.uploadFolder}")
+    private String uploadFolder;
+
+
+    @PostMapping("/commonupload")
+    public List<String> commonUpload(@PathVariable String appid, HttpServletRequest request) throws WxErrorException {
+
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+
+        if (!resolver.isMultipart(request)) {
+            return Lists.newArrayList();
+        }
+
+        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+        Iterator<String> it = multiRequest.getFileNames();
+        List<String> result = Lists.newArrayList();
+        while (it.hasNext()) {
+            try {
+                MultipartFile file = multiRequest.getFile(it.next());
+                final String randomName = getRandomName(file.getOriginalFilename());
+                File newFile = new File(uploadFolder,randomName );
+                this.logger.info("filePath is ：" + newFile.toString());
+                file.transferTo(newFile);
+                this.logger.info("media_id ： " + newFile.getName());
+                result.add(randomName);
+            } catch (IOException e) {
+                this.logger.error(e.getMessage(), e);
+            }
+        }
+
+        return result;
+    }
 
     /**
      * 上传临时素材
@@ -82,4 +119,12 @@ public class WxMaMediaController {
 
         return wxService.getMediaService().getMedia(mediaId);
     }
+
+    public static String getRandomName(String fileName){
+        int index=fileName.lastIndexOf(".");
+        String houzhui=fileName.substring(index);//获取后缀名
+        String uuidFileName= UUID.randomUUID().toString().replace("-","")+houzhui;
+        return uuidFileName;
+    }
+
 }
