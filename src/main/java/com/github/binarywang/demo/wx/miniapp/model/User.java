@@ -1,27 +1,38 @@
-package com.github.binarywang.demo.wx.miniapp.pojo;
+package com.github.binarywang.demo.wx.miniapp.model;
 
-/**
- * @author Jason
- * @title: User
- * @description: TODO
- * @date 2020/3/5  18:51
- */
+import javax.persistence.*;
+
 public class User {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Integer id;
+
     private String name;
 
+    /**
+     * @return id
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
