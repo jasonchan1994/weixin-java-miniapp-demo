@@ -1,5 +1,7 @@
 package com.github.binarywang.demo.wx.miniapp.controller;
 
+import com.github.binarywang.demo.wx.miniapp.model.User;
+import com.github.binarywang.demo.wx.miniapp.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,9 @@ import com.github.binarywang.demo.wx.miniapp.config.WxMaConfiguration;
 import com.github.binarywang.demo.wx.miniapp.utils.JsonUtils;
 import me.chanjar.weixin.common.error.WxErrorException;
 
+import javax.annotation.Resource;
+import java.util.Date;
+
 /**
  * 微信小程序用户接口
  *
@@ -25,6 +30,9 @@ import me.chanjar.weixin.common.error.WxErrorException;
 @RequestMapping("/wx/user/{appid}")
 public class WxMaUserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Resource
+    private UserService userService;
 
     /**
      * 登陆接口
@@ -42,6 +50,18 @@ public class WxMaUserController {
             this.logger.info(session.getSessionKey());
             this.logger.info(session.getOpenid());
             //TODO 可以增加自己的逻辑，关联业务相关数据
+            User user = userService.findBy("openId",session.getOpenid());
+            if(user != null){
+                user.setLastLoginTime(new Date());
+                userService.update(user);
+            }
+            else {
+                user = new User();
+                user.setOpenId(session.getOpenid());
+                user.setFirstLoginTime(new Date());
+                user.setLastLoginTime(new Date());
+                userService.save(user);
+            }
             return JsonUtils.toJson(session);
         } catch (WxErrorException e) {
             this.logger.error(e.getMessage(), e);

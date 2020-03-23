@@ -6,6 +6,8 @@
       WARNING - @mbg.generated
     -->
     <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="first_login_time" jdbcType="TIMESTAMP" property="firstLoginTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
   </resultMap>
 </mapper>

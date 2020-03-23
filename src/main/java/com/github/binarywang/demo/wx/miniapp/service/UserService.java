@@ -4,7 +4,7 @@ import com.github.binarywang.demo.wx.miniapp.core.Service;
 
 
 /**
- * Created by CodeGenerator on 2020/03/22.
+ * Created by CodeGenerator on 2020/03/23.
  */
 public interface UserService extends Service<User> {
 
