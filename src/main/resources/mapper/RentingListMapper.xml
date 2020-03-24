@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.binarywang.demo.wx.miniapp.dao.RentingListMapper">
+  <resultMap id="BaseResultMap" type="com.github.binarywang.demo.wx.miniapp.model.RentingList">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ref_parking_lot" jdbcType="INTEGER" property="refParkingLot" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="costs" jdbcType="DOUBLE" property="costs" />
+    <result column="renting_status" jdbcType="INTEGER" property="rentingStatus" />
+    <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
+  </resultMap>
+</mapper>
