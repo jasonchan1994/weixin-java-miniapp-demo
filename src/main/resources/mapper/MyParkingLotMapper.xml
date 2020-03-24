@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.binarywang.demo.wx.miniapp.dao.MyParkingLotMapper">
+  <resultMap id="BaseResultMap" type="com.github.binarywang.demo.wx.miniapp.model.MyParkingLot">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="parking_lot_id" jdbcType="VARCHAR" property="parkingLotId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+</mapper>
