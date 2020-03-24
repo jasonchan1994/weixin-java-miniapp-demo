@@ -1,4 +1,4 @@
-package com.github.binarywang.demo.wx.miniapp.web;
+package com.github.binarywang.demo.wx.miniapp.controller;
 import com.github.binarywang.demo.wx.miniapp.core.Result;
 import com.github.binarywang.demo.wx.miniapp.core.ResultGenerator;
 import com.github.binarywang.demo.wx.miniapp.model.User;
