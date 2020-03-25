@@ -21,13 +21,15 @@ public class RentingList {
     private Double costs;
 
     /**
-     *  0 free 1 renting 2 rented
+     * 0 free 1 renting 2 rented
      */
     @Column(name = "renting_status")
     private Integer rentingStatus;
 
     @Column(name = "tenant_id")
     private Integer tenantId;
+
+    private String title;
 
     /**
      * @return id
@@ -100,14 +102,18 @@ public class RentingList {
     }
 
     /**
-     * @return renting_status
+     * 获取0 free 1 renting 2 rented
+     *
+     * @return renting_status - 0 free 1 renting 2 rented
      */
     public Integer getRentingStatus() {
         return rentingStatus;
     }
 
     /**
-     * @param rentingStatus
+     * 设置0 free 1 renting 2 rented
+     *
+     * @param rentingStatus 0 free 1 renting 2 rented
      */
     public void setRentingStatus(Integer rentingStatus) {
         this.rentingStatus = rentingStatus;
@@ -125,5 +131,19 @@ public class RentingList {
      */
     public void setTenantId(Integer tenantId) {
         this.tenantId = tenantId;
+    }
+
+    /**
+     * @return title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

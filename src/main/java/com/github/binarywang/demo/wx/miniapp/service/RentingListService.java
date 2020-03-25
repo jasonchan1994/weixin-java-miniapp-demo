@@ -4,7 +4,7 @@ import com.github.binarywang.demo.wx.miniapp.core.Service;
 
 
 /**
- * Created by CodeGenerator on 2020/03/24.
+ * Created by CodeGenerator on 2020/03/25.
  */
 public interface RentingListService extends Service<RentingList> {
 
