@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import tk.mybatis.mapper.entity.Condition;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -44,6 +45,16 @@ public class MyParkingLotController {
     public Result detail(@RequestParam Integer id) {
         MyParkingLot myParkingLot = myParkingLotService.findById(id);
         return ResultGenerator.genSuccessResult(myParkingLot);
+    }
+
+    @PostMapping("/allMyParkinglots")
+    public Result allMyParkinglots(@RequestParam(defaultValue = "0") Integer userId,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+        PageHelper.startPage(page, size);
+        Condition condition = new Condition(MyParkingLot.class);
+        condition.createCriteria().andCondition("user_id = " + userId + "");
+        List<MyParkingLot> list = myParkingLotService.findByCondition(condition);
+        PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.genSuccessResult(pageInfo);
     }
 
     @PostMapping("/list")

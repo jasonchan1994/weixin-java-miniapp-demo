@@ -20,6 +20,9 @@ public class RentingList {
 
     private Double costs;
 
+    /**
+     *  0 free 1 renting 2 rented
+     */
     @Column(name = "renting_status")
     private Integer rentingStatus;
 

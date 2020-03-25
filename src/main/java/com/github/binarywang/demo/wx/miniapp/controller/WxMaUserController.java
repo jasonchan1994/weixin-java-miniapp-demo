@@ -62,7 +62,7 @@ public class WxMaUserController {
                 user.setLastLoginTime(new Date());
                 userService.save(user);
             }
-            return JsonUtils.toJson(session);
+            return JsonUtils.toJson(user);
         } catch (WxErrorException e) {
             this.logger.error(e.getMessage(), e);
             return e.toString();

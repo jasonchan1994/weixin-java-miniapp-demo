@@ -24,6 +24,9 @@ public class MyParkingLot {
     @Column(name = "parking_lot_id")
     private String parkingLotId;
 
+    /**
+     * 0 free 1 renting 2 rented
+     */
     private Integer status;
 
     /**

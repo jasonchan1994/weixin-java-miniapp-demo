@@ -17,7 +17,7 @@ import java.util.List;
 * Created by CodeGenerator on 2020/03/24.
 */
 @RestController
-@RequestMapping("/rentinglist")
+@RequestMapping("/renting")
 public class RentingListController {
     @Resource
     private RentingListService rentingListService;
