@@ -13,7 +13,7 @@ public class BannerConfig {
 
     private String url;
 
-    private Integer order;
+    private Integer orders;
 
     private String direct;
 
@@ -62,17 +62,17 @@ public class BannerConfig {
     }
 
     /**
-     * @return order
+     * @return orders
      */
-    public Integer getOrder() {
-        return order;
+    public Integer getOrders() {
+        return orders;
     }
 
     /**
-     * @param order
+     * @param orders
      */
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setOrders(Integer orders) {
+        this.orders = orders;
     }
 
     /**

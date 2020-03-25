@@ -8,7 +8,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="base_url" jdbcType="VARCHAR" property="baseUrl" />
     <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="orders" jdbcType="INTEGER" property="order" />
     <result column="direct" jdbcType="VARCHAR" property="direct" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
