@@ -8,6 +8,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="readed" jdbcType="INTEGER" property="readed" />
+    <result column="to_user_id" jdbcType="INTEGER" property="toUserId" />
     <result column="context" jdbcType="LONGVARCHAR" property="context" />
   </resultMap>
 </mapper>

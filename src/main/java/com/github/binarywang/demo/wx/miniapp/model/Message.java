@@ -13,6 +13,9 @@ public class Message {
 
     private Integer readed;
 
+    @Column(name = "to_user_id")
+    private Integer toUserId;
+
     private String context;
 
     /**
@@ -55,6 +58,20 @@ public class Message {
      */
     public void setReaded(Integer readed) {
         this.readed = readed;
+    }
+
+    /**
+     * @return to_user_id
+     */
+    public Integer getToUserId() {
+        return toUserId;
+    }
+
+    /**
+     * @param toUserId
+     */
+    public void setToUserId(Integer toUserId) {
+        this.toUserId = toUserId;
     }
 
     /**
