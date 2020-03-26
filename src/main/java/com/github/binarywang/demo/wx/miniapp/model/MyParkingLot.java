@@ -29,6 +29,28 @@ public class MyParkingLot {
      */
     private Integer status;
 
+
+    @Column(name = "pic_urls")
+    private String picUrls;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    private String address;
+
+    public String getPicUrls() {
+        return picUrls;
+    }
+
+    public void setPicUrls(String picUrls) {
+        this.picUrls = picUrls;
+    }
+
     /**
      * @return id
      */

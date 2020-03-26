@@ -11,6 +11,8 @@
     <result column="latitude" jdbcType="DECIMAL" property="latitude" />
     <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="picUrls" jdbcType="VARCHAR" property="pic_urls" />
     <result column="parking_lot_id" jdbcType="VARCHAR" property="parkingLotId" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
