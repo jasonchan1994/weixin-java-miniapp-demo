@@ -13,5 +13,6 @@
     <result column="renting_status" jdbcType="INTEGER" property="rentingStatus" />
     <result column="tenant_id" jdbcType="INTEGER" property="tenantId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
   </resultMap>
 </mapper>

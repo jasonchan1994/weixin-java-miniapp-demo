@@ -20,6 +20,16 @@ public class RentingList {
 
     private Double costs;
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    private String address;
+
     /**
      * 0 free 1 renting 2 rented
      */
