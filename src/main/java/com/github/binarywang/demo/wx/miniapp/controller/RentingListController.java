@@ -53,13 +53,23 @@ public class RentingListController {
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/delete")
+    //取消发布 传入我的车位id
+    @PostMapping("/cancelmypublish")
     public Result delete(@RequestParam Integer id) {
-        final RentingList byId = rentingListService.findById(id);
-        if(byId != null){
-            byId.getRefParkingLot();
+        MyParkingLot myParkingLot = myParkingLotService.findById(id);
+        if(myParkingLot != null){
+            myParkingLot.setStatus(0);
+            myParkingLotService.update(myParkingLot);
+
+            Condition condition = new Condition(RentingList.class);
+            condition.createCriteria().andCondition("ref_parking_lot = " + id + "");
+            List<RentingList> list = rentingListService.findByCondition(condition);
+            for (RentingList renting : list){
+                if(renting != null && renting.getRentingStatus() == 1){
+                    rentingListService.deleteById(renting.getId());
+                }
+            }
         }
-        rentingListService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
