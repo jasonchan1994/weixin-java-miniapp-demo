@@ -51,10 +51,14 @@ public class MessageController {
     @PostMapping("/read")
     public Result read(@RequestParam(defaultValue = "0") Integer id,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        Message byId = messageService.findById(id);
-        if(byId != null){
-            byId.setReaded(1);
-            messageService.update(byId);
+        Condition condition = new Condition(Message.class);
+        condition.createCriteria().andCondition("to_user_id = " + id + "");
+        final List<Message> byCondition = messageService.findByCondition(condition);
+        if(byCondition != null && byCondition.size() > 0){
+            for (Message message:byCondition){
+                message.setReaded(1);
+                messageService.update(message);
+            }
         }
         return ResultGenerator.genSuccessResult();
     }
