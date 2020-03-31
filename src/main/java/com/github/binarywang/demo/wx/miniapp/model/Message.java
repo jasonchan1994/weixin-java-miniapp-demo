@@ -21,6 +21,17 @@ public class Message {
     @Column(name = "ref_parking_lot")
     private Integer refParkingLot;
 
+    public Integer getRefRentId() {
+        return refRentId;
+    }
+
+    public void setRefRentId(Integer refRentId) {
+        this.refRentId = refRentId;
+    }
+
+    @Column(name = "ref_rent_id")
+    private Integer refRentId;
+
     public Integer getRefParkingLot() {
         return refParkingLot;
     }

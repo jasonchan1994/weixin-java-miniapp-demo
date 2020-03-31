@@ -11,5 +11,6 @@
     <result column="to_user_id" jdbcType="INTEGER" property="toUserId" />
     <result column="context" jdbcType="LONGVARCHAR" property="context" />
     <result column="ref_parking_lot" jdbcType="INTEGER" property="refParkingLot" />
+    <result column="ref_rent_id" jdbcType="INTEGER" property="refRentId" />
   </resultMap>
 </mapper>
