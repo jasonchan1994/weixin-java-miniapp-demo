@@ -24,13 +24,13 @@ public class MyWalletController {
     @Resource
     private MyWalletService myWalletService;
 
-    /*@PostMapping("/add")
+    @PostMapping("/add")
     public Result add(MyWallet myWallet) {
         myWalletService.save(myWallet);
         return ResultGenerator.genSuccessResult();
     }
 
-    @PostMapping("/delete")
+    /*@PostMapping("/delete")
     public Result delete(@RequestParam Integer id) {
         myWalletService.deleteById(id);
         return ResultGenerator.genSuccessResult();
