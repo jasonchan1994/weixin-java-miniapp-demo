@@ -114,13 +114,13 @@ public class RentingListController {
                 myWalletService.save(wallet);
                 //发送消息
                 Message message = new Message();
-                message.setRefParkingLot(parkingLot.getId());
+                message.setRefParkingLot(byCondition.getId());
                 message.setContext("您的车位已成功租出，请查看！");
                 message.setCreateTime(new Date());
                 message.setToUserId(parkingLot.getUserId());
                 messageService.save(message);
                 Message message1 = new Message();
-                message1.setRefParkingLot(parkingLot.getId());
+                message1.setRefParkingLot(byCondition.getId());
                 message1.setContext("您已成功租用车位，请查看！");
                 message1.setCreateTime(new Date());
                 message1.setToUserId(userId);
@@ -147,14 +147,14 @@ public class RentingListController {
                 myParkingLotService.update(parkingLot);
                 //发送消息
                 Message message = new Message();
-                message.setRefParkingLot(parkingLot.getId());
+                message.setRefParkingLot(byCondition.getId());
                 message.setContext("您的车位已被归还，请查看！");
                 message.setCreateTime(new Date());
                 message.setToUserId(parkingLot.getUserId());
                 messageService.save(message);
 
                 Message message1 = new Message();
-                message1.setRefParkingLot(parkingLot.getId());
+                message1.setRefParkingLot(byCondition.getId());
                 message1.setContext("您已成功归还车位，请查看！");
                 message1.setCreateTime(new Date());
                 message1.setToUserId(byCondition.getTenantId());
