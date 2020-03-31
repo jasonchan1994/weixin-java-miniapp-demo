@@ -64,7 +64,7 @@ public class SaticScheduleTask {
 
                         Message message1 = new Message();
                         message1.setRefParkingLot(parkingLot.getId());
-                        message1.setRefParkingLot(rent.getId());
+                        message1.setRefRentId(rent.getId());
                         message1.setContext("您的车位已到期自动归还，请查看！");
                         message1.setCreateTime(new Date());
                         message1.setToUserId(rent.getTenantId());
