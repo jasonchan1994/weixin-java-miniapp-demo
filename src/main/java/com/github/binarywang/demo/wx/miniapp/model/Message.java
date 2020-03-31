@@ -18,6 +18,17 @@ public class Message {
 
     private String context;
 
+    @Column(name = "ref_parking_lot")
+    private Integer refParkingLot;
+
+    public Integer getRefParkingLot() {
+        return refParkingLot;
+    }
+
+    public void setRefParkingLot(Integer refParkingLot) {
+        this.refParkingLot = refParkingLot;
+    }
+
     /**
      * @return id
      */

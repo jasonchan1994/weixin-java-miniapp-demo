@@ -54,11 +54,19 @@ public class SaticScheduleTask {
                         parkingLot.setStatus(0);
                         myParkingLotService.update(parkingLot);
                         //发送消息
-                       /* Message message = new Message();
+                        Message message = new Message();
+                        message.setRefParkingLot(parkingLot.getId());
                         message.setContext("您的车位已被归还，请查看！");
                         message.setCreateTime(new Date());
                         message.setToUserId(parkingLot.getUserId());
-                        messageService.save(message);*/
+                        messageService.save(message);
+
+                        Message message1 = new Message();
+                        message1.setRefParkingLot(parkingLot.getId());
+                        message1.setContext("您的车位已到期自动归还，请查看！");
+                        message1.setCreateTime(new Date());
+                        message1.setToUserId(rent.getTenantId());
+                        messageService.save(message1);
                     }
                 }
             }
