@@ -11,6 +11,7 @@ import com.github.binarywang.demo.wx.miniapp.service.MyWalletService;
 import com.github.binarywang.demo.wx.miniapp.service.RentingListService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.gavaghan.geodesy.Ellipsoid;
 import org.gavaghan.geodesy.GeodeticCalculator;
 import org.gavaghan.geodesy.GeodeticCurve;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Condition;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -200,10 +202,14 @@ public class RentingListController {
     }
 
     @PostMapping("/getavalibleparkinglots")
-    public Result getavalibleparkinglots(@RequestParam(defaultValue = "0") Double longitude,@RequestParam(defaultValue = "0") Double latitude,@RequestParam(defaultValue = "0") Integer userId,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public Result getavalibleparkinglots(@RequestParam(defaultValue = "") String query,@RequestParam(defaultValue = "0") Double longitude,@RequestParam(defaultValue = "0") Double latitude,@RequestParam(defaultValue = "0") Integer userId,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         Condition condition2 = new Condition(RentingList.class);
-        condition2.createCriteria().andCondition("renting_status = " + 1 + "");
+        final Example.Criteria criteria = condition2.createCriteria();
+        criteria.andCondition("renting_status = " + 1 + "");
+        if(!StringUtils.isBlank(query)){
+            criteria.andCondition("address like '%" + query + "%'");
+        }
         final List<RentingList> byCondition = rentingListService.findByCondition(condition2);
         Map<Double,RentingList> map = new TreeMap();
         for (RentingList rentingList:byCondition){
