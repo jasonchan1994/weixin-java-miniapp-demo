@@ -11,6 +11,10 @@ import com.github.binarywang.demo.wx.miniapp.service.MyWalletService;
 import com.github.binarywang.demo.wx.miniapp.service.RentingListService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.gavaghan.geodesy.Ellipsoid;
+import org.gavaghan.geodesy.GeodeticCalculator;
+import org.gavaghan.geodesy.GeodeticCurve;
+import org.gavaghan.geodesy.GlobalCoordinates;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +25,8 @@ import tk.mybatis.mapper.entity.Condition;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
@@ -194,13 +200,35 @@ public class RentingListController {
     }
 
     @PostMapping("/getavalibleparkinglots")
-    public Result getavalibleparkinglots(@RequestParam(defaultValue = "0") Integer userId,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public Result getavalibleparkinglots(@RequestParam(defaultValue = "0") Double longitude,@RequestParam(defaultValue = "0") Double latitude,@RequestParam(defaultValue = "0") Integer userId,@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         Condition condition2 = new Condition(RentingList.class);
         condition2.createCriteria().andCondition("renting_status = " + 1 + "");
         final List<RentingList> byCondition = rentingListService.findByCondition(condition2);
-        PageInfo pageInfo = new PageInfo(byCondition);
+        Map<Double,RentingList> map = new TreeMap();
+        for (RentingList rentingList:byCondition){
+            GlobalCoordinates source = new GlobalCoordinates(longitude, latitude);
+            MyParkingLot parkingLot = myParkingLotService.findById(rentingList.getRefParkingLot());
+            final Double v = parkingLot.getLongitude().doubleValue();
+            final Double v1 = parkingLot.getLatitude().doubleValue();
+            GlobalCoordinates target = new GlobalCoordinates(v, v1);
+            double meter2 = getDistanceMeter(source, target, Ellipsoid.WGS84);
+            if(map.get(meter2) != null){
+                meter2 += 0.01;
+            }
+            map.put(meter2,rentingList);
+        }
+        List<RentingList> lists = map.entrySet().stream().map(e -> e.getValue()).collect(Collectors.toList());
+        PageInfo pageInfo = new PageInfo(lists);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+
+    public static double getDistanceMeter(GlobalCoordinates gpsFrom, GlobalCoordinates gpsTo, Ellipsoid ellipsoid){
+
+        //创建GeodeticCalculator，调用计算方法，传入坐标系、经纬度用于计算距离
+        GeodeticCurve geoCurve = new GeodeticCalculator().calculateGeodeticCurve(ellipsoid, gpsFrom, gpsTo);
+
+        return geoCurve.getEllipsoidalDistance();
     }
 
     @PostMapping("/list")
